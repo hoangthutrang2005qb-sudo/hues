@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đặc Tả Smart Contract — HUE Soulbound Credentials</title>
+  <meta name="description" content="Đặc tả kỹ thuật và kiến trúc bảo mật của Smart Contract ProjectCore.sol (HUE-SBT) trên Sepolia Testnet.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Floating Glass Header Navigation -->
+  <header class="page-top-nav">
+    <a href="index.html" class="page-nav-brand">
+      <div class="page-nav-logo">🏛️</div>
+      <div>
+        <div class="page-nav-title">ĐẠI HỌC HUẾ</div>
+        <div class="page-nav-subtitle">Hệ Thống Văn Bằng Số (HUE-SBT)</div>
+      </div>
+    </a>
+
+    <div class="page-nav-actions">
+      <a href="admin.html" class="nav-link-btn">🏛️ Quản trị</a>
+      <a href="student.html" class="nav-link-btn">🎓 Sinh viên</a>
+      <a href="enterprise.html" class="nav-link-btn">🏢 Doanh nghiệp</a>
+      <a href="contract.html" class="nav-link-btn active">🛡️ Smart Contract</a>
+      <button class="btn-connect-metamask" onclick="handleWalletBtnClick()">🦊 Kết nối MetaMask</button>
+    </div>
+  </header>
+
+  <div class="app-container">
+    <!-- Header Card -->
+    <div class="card" style="margin-bottom:24px;border-left:5px solid #4f46e5;background:linear-gradient(to right, #fbfaff 0%, #ffffff 100%);">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+        <div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <h2 style="font-size:1.4rem;font-weight:850;color:var(--text-main);">HUE Soulbound Token (HUE-SBT)</h2>
+            <span class="badge-tag" style="background:#eef2ff;color:#4f46e5;border-color:#c7d2fe;">ERC-721 v5 OpenZeppelin</span>
+          </div>
+          <p style="font-size:0.9rem;color:var(--text-muted);margin-top:6px;">
+            Hợp đồng thông minh phân tán phục vụ cấp phát, bảo chứng và lưu trữ vĩnh viễn văn bằng số Đại học Huế trên Sepolia.
+          </p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <button class="btn-primary" style="background:var(--rose);border-color:var(--rose);" onclick="triggerSimulateTransfer(1)">
+            ⛔ Thử Nghiệm Lỗi Soulbound Revert
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contract Specs Grid -->
+    <div class="portal-grid" style="margin-bottom:24px;">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">1. Thông Số Mạng &amp; On-Chain Deployment</h3>
+          <span class="badge-tag" style="background:var(--emerald-light);color:var(--emerald);border-color:var(--emerald-border);">Sepolia Live</span>
+        </div>
+        <table class="verify-meta-table">
+          <tr><td>Mạng triển khai:</td><td><strong>Ethereum Sepolia Testnet</strong></td></tr>
+          <tr><td>Chain ID:</td><td><code>11155111</code> (Hex: <code>0xaa36a7</code>)</td></tr>
+          <tr><td>Tên Token:</td><td><strong>Hue University Soulbound Token</strong></td></tr>
+          <tr><td>Ký hiệu (Symbol):</td><td><code>HUE-SBT</code></td></tr>
+          <tr><td>Chuẩn Token:</td><td><code>ERC-721 Non-Fungible Token</code></td></tr>
+          <tr><td>Thư viện cơ sở:</td><td><code>OpenZeppelin Contracts v5.0.0</code></td></tr>
+          <tr><td>Cơ chế chuyển nhượng:</td><td><strong style="color:var(--rose);">Bất khả chuyển nhượng (Soulbound)</strong></td></tr>
+          <tr><td>Hạn mức đợt cấp (Cap):</td><td><code>50 Huy hiệu / Đợt vinh danh</code></td></tr>
+          <tr><td>Trình khám phá:</td><td><a href="https://sepolia.etherscan.io" target="_blank" style="color:var(--primary);font-weight:700;text-decoration:underline;">Sepolia Etherscan ↗</a></td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">2. Các Ràng Buộc Bất Biến (Security Invariants)</h3>
+          <span class="badge-tag" style="background:var(--primary-light);color:var(--primary);border-color:var(--primary-border);">Security 100%</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;font-size:0.88rem;">
+          <div style="padding:12px 14px;background:var(--bg-subtle);border-radius:var(--radius-sm);border-left:3px solid var(--rose);">
+            <strong style="color:var(--rose);">1. Cơ chế Soulbound (_update hook):</strong><br>
+            <span style="color:var(--text-muted);font-size:0.84rem;">Chỉ cho phép đúc mới (<code>from == 0</code>) và thiêu hủy (<code>to == 0</code>). Bất kỳ lệnh chuyển nhượng ví nào (<code>transferFrom</code>, <code>safeTransferFrom</code>) đều bị revert ngay lập tức on-chain.</span>
+          </div>
+          <div style="padding:12px 14px;background:var(--bg-subtle);border-radius:var(--radius-sm);border-left:3px solid var(--gold);">
+            <strong style="color:var(--gold);">2. Một Sinh viên — Một Ví duy nhất:</strong><br>
+            <span style="color:var(--text-muted);font-size:0.84rem;">Ngăn chặn việc 1 sinh viên tạo nhiều ví để nhận trùng lặp hoặc mượn ví của sinh viên khác.</span>
+          </div>
+          <div style="padding:12px 14px;background:var(--bg-subtle);border-radius:var(--radius-sm);border-left:3px solid var(--emerald);">
+            <strong style="color:var(--emerald);">3. Quyền thu hồi kỷ luật (OnlyOwner):</strong><br>
+            <span style="color:var(--text-muted);font-size:0.84rem;">Khi sinh viên vi phạm quy chế đào tạo, Hội đồng Đại học Huế kích hoạt hàm <code>revokeBadge()</code> để thiêu hủy on-chain, lưu lại số quyết định kỷ luật vĩnh viễn.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Solidity Code Sample -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">💻 Mã Nguồn Cốt Lõi: Khóa Chuyển Nhượng Soulbound (Solidity)</h3>
+        <span class="badge-tag">ProjectCore.sol</span>
+      </div>
+      
+      <pre style="background:#0f172a;color:#f8fafc;padding:20px;border-radius:var(--radius-md);overflow-x:auto;font-family:'Consolas','Courier New',monospace;font-size:0.86rem;line-height:1.65;margin-top:12px;border:1px solid #334155;"><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+error SoulboundTokenNonTransferable();
+error WalletAlreadyLinked();
+error DuplicateBadgeType();
+
+/**
+ * @title ProjectCore - Hệ Thống Văn Bằng Số Đại Học Huế
+ * @notice Khóa chuyển nhượng bất biến (Soulbound Token) theo chuẩn ERC-721 v5
+ */
+contract ProjectCore is ERC721, Ownable {
+    // Override _update hook trong OpenZeppelin v5 để biến token thành Soulbound
+    function _update(address to, uint256 tokenId, address auth) internal override returns (address) {
+        address from = _ownerOf(tokenId);
+
+        // Chỉ cho phép Mint (from == address(0)) hoặc Burn (to == address(0))
+        if (from != address(0) && to != address(0)) {
+            revert SoulboundTokenNonTransferable();
+        }
+
+        return super._update(to, tokenId, auth);
+    }
+}</code></pre>
+    </div>
+  </div>
+
+  <!-- REVERT MODAL: SOULBOUND REVERT DEMO -->
+  <div id="revertModalOverlay" class="modal-overlay" onclick="if(event.target===this)closeRevertModal()">
+    <div class="modal-box">
+      <div class="modal-icon-revert">⛔</div>
+      <h3 class="modal-title">GIAO DỊCH BỊ BLOCKCHAIN TỪ CHỐI (REVERTED)</h3>
+      <p class="modal-text">Hợp đồng thông minh <strong>ProjectCore.sol</strong> đã chặn giao dịch chuyển nhượng văn bằng này theo đúng thiết kế bảo mật Soulbound.</p>
+      
+      <div class="code-box-revert">
+        // Lỗi Revert chuẩn ERC-721 Soulbound:<br>
+        <strong>revert SoulboundTokenNonTransferable();</strong><br>
+        <span style="color:#94a3b8;font-size:0.75rem;">at ProjectCore._update(address to, uint256 tokenId, address auth) on Sepolia</span>
+      </div>
+
+      <p style="font-size:0.84rem;color:var(--text-muted);line-height:1.55;margin-bottom:20px;">
+        🔒 <strong>Bảo vệ danh dự &amp; tính chính danh:</strong> Huy hiệu học thuật gắn liền vĩnh viễn với danh tính sinh viên được vinh danh, ngăn chặn tuyệt đối tình trạng bán tài khoản, cho mượn hoặc chuyển nhượng văn bằng sang ví khác.
+      </p>
+
+      <button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeRevertModal()">
+        Đã hiểu &amp; Đóng cửa sổ
+      </button>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="toast-container"></div>
+  <script src="shared.js"></script>
+</body>
+</html>

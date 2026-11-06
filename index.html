@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HUE Soulbound Credentials — Hệ Thống Văn Bằng Số Đại Học Huế</title>
+  <meta name="description" content="Nền tảng quản lý, cấp phát và thẩm định văn bằng thành tích sinh viên Đại học Huế trên blockchain Sepolia Testnet.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Floating Glass Header Navigation -->
+  <header class="page-top-nav">
+    <a href="index.html" class="page-nav-brand">
+      <div class="page-nav-logo">🏛️</div>
+      <div>
+        <div class="page-nav-title">ĐẠI HỌC HUẾ</div>
+        <div class="page-nav-subtitle">Hệ Thống Văn Bằng Số (HUE-SBT)</div>
+      </div>
+    </a>
+
+    <div class="page-nav-actions">
+      <a href="admin.html" class="nav-link-btn">🏛️ Quản trị</a>
+      <a href="student.html" class="nav-link-btn">🎓 Sinh viên</a>
+      <a href="enterprise.html" class="nav-link-btn">🏢 Doanh nghiệp</a>
+      <a href="contract.html" class="nav-link-btn">🛡️ Smart Contract</a>
+      <button class="btn-connect-metamask" onclick="handleWalletBtnClick()">🦊 Kết nối MetaMask</button>
+    </div>
+  </header>
+
+  <div class="app-container">
+    <!-- MAGNIFICENT HERO MASTER BANNER -->
+    <section class="hero-master-banner">
+      <div class="hero-mesh-grid"></div>
+      <div class="hero-glow-orb hero-glow-orb-blue"></div>
+      <div class="hero-glow-orb hero-glow-orb-gold"></div>
+
+      <div class="hero-content-split">
+        <!-- Left Column: Inspiring Presentation -->
+        <div>
+          <div class="hero-badge-pill">
+            <span class="wallet-dot"></span>
+            <span>MẠNG ETHEREUM SEPOLIA · CHUẨN ERC-721 SOULBOUND TOKEN</span>
+          </div>
+
+          <h1 class="hero-headline">
+            Văn Bằng &amp; Danh Hiệu Số<br>
+            <span class="gradient-gold">Đại Học Huế</span>
+          </h1>
+
+          <p class="hero-lead-text">
+            Hệ sinh thái ứng dụng hợp đồng thông minh <strong>ProjectCore.sol</strong> để cấp phát, bảo chứng và lưu trữ vĩnh viễn toàn bộ văn bằng tốt nghiệp, chứng chỉ và danh hiệu sinh viên trực tiếp on-chain — <em>Bất khả giả mạo, bất khả chuyển nhượng, xác thực tức thì toàn cầu</em>.
+          </p>
+
+          <div class="hero-buttons-cluster">
+            <a href="student.html" class="btn-hero-primary">
+              <span>🎓 Cổng Tra Cứu Sinh Viên</span>
+              <span>→</span>
+            </a>
+            <a href="enterprise.html" class="btn-hero-glass">
+              <span>🏢 Cổng Xác Minh Doanh Nghiệp</span>
+            </a>
+            <button class="btn-connect-metamask" style="background:#fff;padding:12px 20px;" onclick="handleWalletBtnClick()">
+              🦊 Kết Nối Ví MetaMask
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive 3D Floating Diploma Card -->
+        <div class="hero-certificate-stage">
+          <div class="hologram-diploma-card">
+            <div class="diploma-ornate-border"></div>
+
+            <div class="diploma-crest">
+              <span>🏛️</span> <span>HUE UNIVERSITY · RECOGNITION</span>
+            </div>
+
+            <div class="diploma-seal-medallion">
+              🏆
+            </div>
+
+            <h3 class="diploma-title">Sinh viên 5 tốt tiêu biểu cấp ĐHH</h3>
+            <div class="diploma-subtitle">ĐẠI HỌC HUẾ — BẢO CHỨNG VĨNH VIỄN ON-CHAIN</div>
+
+            <div class="diploma-student-box">
+              <div class="diploma-student-name">Phan Thị Yến Nhi</div>
+              <div class="diploma-student-id">MSSV: 23K4300014 · Khóa K58</div>
+            </div>
+
+            <div class="diploma-qr-bar">
+              <div class="diploma-qr-matrix"></div>
+              <div class="diploma-qr-meta">
+                <strong>XÁC THỰC BLOCKCHAIN TỨC THÌ</strong>
+                <span>Sepolia Block #6,892,104</span><br>
+                <span>Smart Contract ProjectCore.sol</span>
+              </div>
+            </div>
+
+            <div style="font-family:monospace;font-size:0.75rem;color:var(--primary);margin-bottom:12px;word-break:break-all;background:#f1f5f9;padding:6px;border-radius:6px;">
+              Holder: 0x71C26071493b86EFA7AC41b38f828a2aC41Ea47B
+            </div>
+
+            <div class="diploma-lock-pill">
+              <span>🔒</span> <span>SOULBOUND NON-TRANSFERABLE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE ON-CHAIN MARQUEE TICKER BANNER -->
+    <div class="live-ticker-banner">
+      <div class="ticker-label">
+        <span class="wallet-dot"></span> LIVE ON-CHAIN
+      </div>
+      <div class="ticker-feed">
+        <div class="ticker-item">
+          <span>🌐 Mạng: <strong>Ethereum Sepolia Testnet (Chain ID 11155111)</strong></span>
+        </div>
+        <span>•</span>
+        <div class="ticker-item">
+          <span>📜 Hợp đồng: <strong>ProjectCore.sol (ERC-721 v5 OpenZeppelin)</strong></span>
+        </div>
+        <span>•</span>
+        <div class="ticker-item">
+          <span>🔒 Cơ chế: <strong>_update hook Revert (Khóa chuyển nhượng 100%)</strong></span>
+        </div>
+        <span>•</span>
+        <div class="ticker-item">
+          <span>🏢 Đơn vị thẩm định liên kết: <strong>FPT Software, VNG, Viettel Group</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS SHOWCASE CARDS (4 GRIDS) -->
+    <div class="stats-banner-grid">
+      <div class="stat-glow-card">
+        <div class="stat-card-icon">🎖️</div>
+        <div class="stat-card-number" id="statMinted">3</div>
+        <div class="stat-card-title">HUE-SBT Đã Cấp Phát On-Chain</div>
+      </div>
+
+      <div class="stat-glow-card">
+        <div class="stat-card-icon">⛓️</div>
+        <div class="stat-card-number">Sepolia</div>
+        <div class="stat-card-title">Mạng Blockchain Phân Tán</div>
+      </div>
+
+      <div class="stat-glow-card">
+        <div class="stat-card-icon">🛡️</div>
+        <div class="stat-card-number">100%</div>
+        <div class="stat-card-title">Bảo Chứng Soulbound Chống Gian Lận</div>
+      </div>
+
+      <div class="stat-glow-card">
+        <div class="stat-card-icon">⚡</div>
+        <div class="stat-card-number">&lt; 1 Giây</div>
+        <div class="stat-card-title">Thời Gian Thẩm Định Toàn Cầu</div>
+      </div>
+    </div>
+
+    <!-- PORTALS SECTION WITH COVER BANNERS -->
+    <section style="margin-bottom:48px;">
+      <div class="portals-section-header">
+        <h2 class="portals-section-title">Hệ Sinh Thái 4 Cổng Thông Tin Tích Hợp</h2>
+        <p class="portals-section-desc">
+          Mỗi vai trò được bảo vệ bởi lớp bảo mật phân quyền chuyên biệt, đồng bộ dữ liệu sổ cái phân tán theo thời gian thực.
+        </p>
+      </div>
+
+      <div class="portal-cards-deck">
+        <!-- Portal 1: Admin -->
+        <a href="admin.html" class="portal-premium-card">
+          <div class="portal-card-banner portal-card-banner--admin">
+            <div class="portal-avatar-icon">🏛️</div>
+          </div>
+          <div class="portal-card-body">
+            <h3 class="portal-role-title">Ban Quản Trị &amp; Cấp Phát</h3>
+            <p class="portal-role-desc">
+              Dành cho Hội đồng Khen thưởng Đại học Huế. Ký duyệt và phát hành huy hiệu on-chain, xem live preview phôi bằng và thu hồi kỷ luật.
+            </p>
+            <ul class="portal-role-features">
+              <li><span class="check">✓</span> Quyền Owner đúc token trực tiếp</li>
+              <li><span class="check">✓</span> Live Preview văn bằng thời gian thực</li>
+              <li><span class="check">✓</span> Thu hồi kỷ luật và lưu vết on-chain</li>
+            </ul>
+            <div class="portal-card-footer">
+              <span>Cổng Hội Đồng Khen Thưởng</span>
+              <span>Truy cập →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Portal 2: Student -->
+        <a href="student.html" class="portal-premium-card">
+          <div class="portal-card-banner portal-card-banner--student">
+            <div class="portal-avatar-icon">🎓</div>
+          </div>
+          <div class="portal-card-body">
+            <h3 class="portal-role-title">Cổng Thông Tin Sinh Viên</h3>
+            <p class="portal-role-desc">
+              Đăng nhập bằng MSSV để xem toàn bộ danh hiệu số cá nhân. Liên kết ví MetaMask, ký số Web3 và tạo link xác minh CV xin việc.
+            </p>
+            <ul class="portal-role-features">
+              <li><span class="check">✓</span> Tra cứu bằng cấp &amp; danh hiệu cá nhân</li>
+              <li><span class="check">✓</span> Kết nối ví MetaMask cá nhân thật</li>
+              <li><span class="check">✓</span> Tạo link chứng thực đính kèm CV xin việc</li>
+            </ul>
+            <div class="portal-card-footer">
+              <span>Cổng Sinh Viên ĐHH</span>
+              <span>Truy cập →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Portal 3: Enterprise -->
+        <a href="enterprise.html" class="portal-premium-card">
+          <div class="portal-card-banner portal-card-banner--enterprise">
+            <div class="portal-avatar-icon">🏢</div>
+          </div>
+          <div class="portal-card-body">
+            <h3 class="portal-role-title">Cổng Doanh Nghiệp Thẩm Định</h3>
+            <p class="portal-role-desc">
+              Nhà tuyển dụng (FPT Software, VNG, Viettel) tra cứu và xác thực tính chính danh văn bằng ứng viên trực tiếp trên blockchain.
+            </p>
+            <ul class="portal-role-features">
+              <li><span class="check">✓</span> Thẩm định theo Token ID hoặc Địa chỉ ví</li>
+              <li><span class="check">✓</span> Kết quả tức thì trong 1 giây không qua giấy tờ</li>
+              <li><span class="check">✓</span> Báo cáo chứng thực chuẩn hóa tuyển dụng</li>
+            </ul>
+            <div class="portal-card-footer">
+              <span>Cổng Thẩm Định Tuyển Dụng</span>
+              <span>Truy cập →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Portal 4: Smart Contract Specs -->
+        <a href="contract.html" class="portal-premium-card">
+          <div class="portal-card-banner portal-card-banner--contract">
+            <div class="portal-avatar-icon">🛡️</div>
+          </div>
+          <div class="portal-card-body">
+            <h3 class="portal-role-title">Đặc Tả Kỹ Thuật Smart Contract</h3>
+            <p class="portal-role-desc">
+              Mã nguồn mở và kiến trúc bảo mật của ProjectCore.sol (ERC-721 v5 OpenZeppelin), thông số Sepolia và nút thử nghiệm Soulbound Revert.
+            </p>
+            <ul class="portal-role-features">
+              <li><span class="check">✓</span> Mã nguồn Solidity công khai 100%</li>
+              <li><span class="check">✓</span> Thử nghiệm chặn chuyển nhượng Soulbound</li>
+              <li><span class="check">✓</span> Tương thích ví Web3 &amp; Sepolia Etherscan</li>
+            </ul>
+            <div class="portal-card-footer">
+              <span>Đặc Tả Kỹ Thuật Mở</span>
+              <span>Truy cập →</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- CORPORATE TRUST & EMPLOYERS PARTNER BANNER -->
+    <div class="partners-trust-banner">
+      <div class="partners-title">
+        ĐỐI TÁC HỌC THUẬT &amp; CÁC ĐƠN VỊ TUYỂN DỤNG TIN TƯỞNG THẨM ĐỊNH VĂN BẰNG ĐHH
+      </div>
+      <div class="partners-logos-row">
+        <div class="partner-logo-item">
+          <span>💻</span> <span>FPT Software</span>
+        </div>
+        <div class="partner-logo-item">
+          <span>🎮</span> <span>VNG Corporation</span>
+        </div>
+        <div class="partner-logo-item">
+          <span>📶</span> <span>Viettel Group</span>
+        </div>
+        <div class="partner-logo-item">
+          <span>🌐</span> <span>VNPT Telecom</span>
+        </div>
+        <div class="partner-logo-item">
+          <span>🏦</span> <span>BIDV Bank</span>
+        </div>
+        <div class="partner-logo-item">
+          <span>🏛️</span> <span>Hội Đồng Đào Tạo ĐHH</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SITE FOOTER BANNER -->
+    <footer class="site-footer-banner">
+      <div class="footer-top-row">
+        <div class="footer-col-info">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+            <div style="width:36px;height:36px;border-radius:8px;background:var(--gold-gradient);display:flex;align-items:center;justify-content:center;font-size:18px;">🏛️</div>
+            <h4 style="margin:0;">HỆ THỐNG VĂN BẰNG SỐ ĐẠI HỌC HUẾ</h4>
+          </div>
+          <p>
+            Đề tài ứng dụng công nghệ Chuỗi khối (Blockchain) trong số hóa, lưu trữ bất biến và minh bạch hóa văn bằng, chứng chỉ và danh hiệu sinh viên Đại học Huế.
+          </p>
+        </div>
+
+        <div class="footer-col-links">
+          <a href="index.html">Trang chủ</a>
+          <a href="admin.html">Ban Quản trị</a>
+          <a href="student.html">Cổng Sinh viên</a>
+          <a href="enterprise.html">Cổng Doanh nghiệp</a>
+          <a href="contract.html">Smart Contract</a>
+          <a href="https://sepolia.etherscan.io" target="_blank">Sepolia Etherscan ↗</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom-row">
+        <div>© 2026 Đại học Huế · Khoa Kinh tế &amp; Phát triển · Môn Học ECO2432 (Nhóm 1 - K58)</div>
+        <div>Chuẩn Smart Contract: <code>ProjectCore.sol (ERC-721 v5 OpenZeppelin)</code></div>
+      </div>
+    </footer>
+  </div>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="shared.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const db = loadDatabase();
+      document.getElementById("statMinted").innerText = db.length;
+    });
+  </script>
+</body>
+</html>
